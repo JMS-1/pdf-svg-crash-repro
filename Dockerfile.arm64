@@ -1,0 +1,14 @@
+FROM mcr.microsoft.com/dotnet/aspnet:10.0-alpine
+
+RUN apk add icu-libs icu-data-full tzdata fontconfig gcompat font-terminus font-inconsolata font-dejavu font-noto font-noto-cjk font-awesome font-noto-extra
+
+WORKDIR /app
+
+COPY "bin/Release/net10.0/linux-arm64/publish" /app
+
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+
+ENTRYPOINT ["dotnet", "SvgRepro.dll"]
+
+EXPOSE 80
+
